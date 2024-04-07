@@ -40,8 +40,8 @@ class AsyncCompletion:
                 'authority'  : 'edgeservices.bing.com',
                 'cookie'     : f'_U={token}',
                 'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.69',
-            }
-        )
+            }, 
+        timeout=60)
 
         conversationId        = create.json()['conversationId']
         clientId              = create.json()['clientId']

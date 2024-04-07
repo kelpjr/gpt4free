@@ -135,7 +135,7 @@ class Completion:
                     "enable_memory"         : enable_memory,
                     "enable_google_results" : enable_google_results,
                     "input_text"            : prompt,
-                    "history_data"          : history_data}).json()
+                    "history_data"          : history_data}, timeout=60).json()
 
         return SonicResponse({
                 'id'     : f'cmpl-premium-{int(time())}', 
