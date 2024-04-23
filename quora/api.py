@@ -21,7 +21,6 @@
 import requests
 import re
 import json
-import random
 import logging
 import time
 import queue
@@ -29,11 +28,11 @@ import threading
 import traceback
 import hashlib
 import string
-import random
 import requests.adapters
 import websocket
 from pathlib import Path
 from urllib.parse import urlparse
+import secrets
 
 
 parent_path = Path(__file__).resolve().parent
@@ -106,7 +105,7 @@ class Client:
         self.connect_ws()
 
     def setup_connection(self):
-        self.ws_domain = f"tch{random.randint(1, 1e6)}"
+        self.ws_domain = f"tch{secrets.SystemRandom().randint(1, 1e6)}"
         self.next_data = self.get_next_data(overwrite_vars=True)
         self.channel = self.get_channel_data()
         self.bots = self.get_bots(download_next_data=False)

@@ -1,8 +1,9 @@
 from requests   import Session
 from names      import get_first_name, get_last_name
-from random     import choice
 from requests   import post
 from time       import time
+import secrets
+
 from colorama   import Fore, init; init()
 
 class logger:
@@ -78,7 +79,7 @@ class Account:
         hosts    = ['gmail.com', 'protonmail.com', 'proton.me', 'outlook.com']
         
         return {
-            "email"             : f"{f_name.lower()}.{l_name.lower()}@{choice(hosts)}",
+            "email"             : f"{f_name.lower()}.{l_name.lower()}@{secrets.choice(hosts)}",
             "password"          : password,
             "confirm_password"  : password,
             "full_name"         : f'{f_name} {l_name}'

@@ -3,11 +3,11 @@ from browser_cookie3 import edge, chrome
 from ssl             import create_default_context
 from certifi         import where
 from uuid            import uuid4
-from random          import randint
 from json            import dumps, loads
 
 import asyncio
 import websockets
+import secrets
 
 ssl_context = create_default_context()
 ssl_context.load_verify_locations(where())
@@ -70,7 +70,7 @@ class AsyncCompletion:
                 'x-ms-useragent': 'azsdk-js-api-client-factory/1.0.0-beta.1 core-rest-pipeline/1.10.0 OS/Win32',
                 'Referer': 'https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx',
                 'Referrer-Policy': 'origin-when-cross-origin',
-                'x-forwarded-for': f'13.{randint(104, 107)}.{randint(0, 255)}.{randint(0, 255)}'
+                'x-forwarded-for': f'13.{secrets.SystemRandom().randint(104, 107)}.{secrets.SystemRandom().randint(0, 255)}.{secrets.SystemRandom().randint(0, 255)}'
             }
         )
 

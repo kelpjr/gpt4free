@@ -1,9 +1,9 @@
 from requests     import Session
 from re           import search
-from random       import randint
 from json         import dumps, loads
-from random       import randint
 from urllib.parse import urlencode
+import secrets
+
 from dotenv       import load_dotenv; load_dotenv()
 from os           import getenv
 
@@ -78,7 +78,7 @@ class Completion:
     
         params = urlencode({
             'bl'     : 'boq_assistant-bard-web-server_20230326.21_p0',
-            '_reqid' : randint(1111, 9999),
+            '_reqid' : secrets.SystemRandom().randint(1111, 9999),
             'rt'     : 'c',
         })
 

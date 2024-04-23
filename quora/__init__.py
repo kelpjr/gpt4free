@@ -3,7 +3,6 @@ from datetime import datetime
 from hashlib import md5
 from json import dumps
 from pathlib import Path
-from random import choice, choices, randint
 from re import search, findall
 from string import ascii_letters, digits
 from typing import Optional
@@ -19,6 +18,7 @@ from tls_client import Session as TLS
 
 from quora.api import Client as PoeClient
 from quora.mail import Emailnator
+import secrets
 
 # from twocaptcha import TwoCaptcha
 # solver = TwoCaptcha('72747bf24a9d89b4dcc1b24875efd358')
@@ -114,7 +114,7 @@ class Model:
         }
 
         if not handle:
-            handle = f"gptx{randint(1111111, 9999999)}"
+            handle = f"gptx{secrets.SystemRandom().randint(1111111, 9999999)}"
 
         client = Session()
         client.cookies["p-b"] = token
@@ -155,7 +155,7 @@ class Model:
                     "description": description,
                     "profilePictureUrl": "https://qph.fs.quoracdn.net/main-qimg-24e0b480dcd946e1cc6728802c5128b6",
                     "apiUrl": None,
-                    "apiKey": "".join(choices(ascii_letters + digits, k=32)),
+                    "apiKey": "".join(secrets.SystemRandom().choices(ascii_letters + digits, k=32)),
                     "isApiBot": False,
                     "hasLinkification": False,
                     "hasMarkdownRendering": False,
@@ -295,7 +295,7 @@ class Account:
             .read()
             .splitlines()
         )
-        return choice(cookies)
+        return secrets.choice(cookies)
 
 
 class StreamingCompletion:
