@@ -1,4 +1,4 @@
-from requests import post, get
+from security.safe_requests import post, get
 from json import dumps
 #from mail import MailClient
 from time import sleep

@@ -1,5 +1,6 @@
 import requests
 import email
+from security import safe_requests
 
 class MailClient:
 
@@ -56,8 +57,7 @@ class MailClient:
             'X-MailboxToken': self.token,
         }
 
-        self.response = requests.get(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers)
+        self.response = safe_requests.get(f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers)
         self.response = self.response.json()
         self.mailids = self.response['result']
         return self.mailids
@@ -85,8 +85,7 @@ class MailClient:
             'accept': 'application/json',
             'X-MailboxToken': self.token,
         }
-        self.response = requests.get(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers)
+        self.response = safe_requests.get(f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers)
         self.response = self.response.json()
         self.mail = self.response['result']
         if raw is False:
