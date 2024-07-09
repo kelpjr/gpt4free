@@ -30,7 +30,7 @@ json_data = {
     ],
 }
 
-response = requests.post('https://openprompt.co/api/chat2', cookies=cookies, headers=headers, json=json_data, stream=True)
+response = requests.post('https://openprompt.co/api/chat2', cookies=cookies, headers=headers, json=json_data, stream=True, timeout=60)
 for chunk in response.iter_content(chunk_size=1024):
     print(chunk)
 

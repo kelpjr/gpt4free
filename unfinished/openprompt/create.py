@@ -4,7 +4,7 @@ from json import dumps
 from time import sleep
 from re import findall
 
-html = get('https://developermail.com/mail/')
+html = get('https://developermail.com/mail/', timeout=60)
 print(html.cookies.get('mailboxId'))
 email = findall(r'mailto:(.*)">', html.text)[0]
 
@@ -21,7 +21,7 @@ json_data = {
     'gotrue_meta_security': {},
 }
 
-response = post('https://usjsmufuzdcrrceuhnyj.supabase.co/auth/v1/signup', headers=headers, json=json_data)
+response = post('https://usjsmufuzdcrrceuhnyj.supabase.co/auth/v1/signup', headers=headers, json=json_data, timeout=60)
 print(response.json())
 
 # email_link = None
@@ -35,7 +35,7 @@ print(response.json())
 quit()
 
 url      = input("Enter the url: ")
-response = get(url, allow_redirects=False)
+response = get(url, allow_redirects=False, timeout=60)
 
 # https://openprompt.co/#access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjgyMjk0ODcxLCJzdWIiOiI4NWNkNTNiNC1lZTUwLTRiMDQtOGJhNS0wNTUyNjk4ODliZDIiLCJlbWFpbCI6ImNsc2J5emdqcGhiQGJ1Z2Zvby5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvdHAiLCJ0aW1lc3RhbXAiOjE2ODE2OTAwNzF9XSwic2Vzc2lvbl9pZCI6ImY4MTg1YTM5LTkxYzgtNGFmMy1iNzAxLTdhY2MwY2MwMGNlNSJ9.UvcTfpyIM1TdzM8ZV6UAPWfa0rgNq4AiqeD0INy6zV8&expires_in=604800&refresh_token=_Zp8uXIA2InTDKYgo8TCqA&token_type=bearer&type=signup
 
@@ -59,6 +59,6 @@ json_data = {
     ]
 }
 
-response = post('https://openprompt.co/api/chat2', cookies=cookies, json=json_data, stream=True)
+response = post('https://openprompt.co/api/chat2', cookies=cookies, json=json_data, stream=True, timeout=60)
 for chunk in response.iter_content(chunk_size=1024):
     print(chunk)
