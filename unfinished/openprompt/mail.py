@@ -20,7 +20,7 @@ class MailClient:
             pass
         else:
             self.response = requests.put(
-                'https://www.developermail.com/api/v1/mailbox', headers=headers)
+                'https://www.developermail.com/api/v1/mailbox', headers=headers, timeout=60)
             self.response = self.response.json()
             self.username = self.response['result']['name']
             self.token = self.response['result']['token']
@@ -33,7 +33,7 @@ class MailClient:
             'X-MailboxToken': self.token,
         }
         self.response = requests.delete(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers, timeout=60)
         self.response = self.response.json()
         self.username = None
         self.token = None
@@ -45,7 +45,7 @@ class MailClient:
             'X-MailboxToken': self.token,
         }
         self.response = requests.put(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}/token', headers=headers)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}/token', headers=headers, timeout=60)
         self.response = self.response.json()
         self.token = self.response['result']['token']
         return {'username': self.username, 'token': self.token}
@@ -57,7 +57,7 @@ class MailClient:
         }
 
         self.response = requests.get(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}', headers=headers, timeout=60)
         self.response = self.response.json()
         self.mailids = self.response['result']
         return self.mailids
@@ -75,7 +75,7 @@ class MailClient:
         data = str(mailids)
 
         self.response = requests.post(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages', headers=headers, data=data)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages', headers=headers, data=data, timeout=60)
         self.response = self.response.json()
         self.mails = self.response['result']
         return self.mails
@@ -86,7 +86,7 @@ class MailClient:
             'X-MailboxToken': self.token,
         }
         self.response = requests.get(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers, timeout=60)
         self.response = self.response.json()
         self.mail = self.response['result']
         if raw is False:
@@ -99,7 +99,7 @@ class MailClient:
             'X-MailboxToken': self.token,
         }
         self.response = requests.delete(
-            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers)
+            f'https://www.developermail.com/api/v1/mailbox/{self.username}/messages/{mailid}', headers=headers, timeout=60)
         self.response = self.response.json()
         return self.response
 

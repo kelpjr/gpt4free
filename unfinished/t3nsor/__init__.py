@@ -75,7 +75,7 @@ class Completion:
             'messages'  : messages,
             'key'       : '',
             'prompt'    : prompt
-        })
+        }, timeout=60)
 
         return T3nsorResponse({
             'id'     : f'cmpl-1337-{int(time())}', 
@@ -113,7 +113,7 @@ class StreamCompletion:
             'messages'  : messages,
             'key'       : '',
             'prompt'    : prompt
-        })
+        }, timeout=60)
         
         for chunk in response.iter_content(chunk_size = 2046):
             yield T3nsorResponse({

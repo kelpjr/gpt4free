@@ -29,7 +29,7 @@ data = [
 query_param = create_query_param(data)
 url = f'https://openai.a2hosted.com/chat?q={query_param}'
 
-response = requests.get(url, headers=headers, stream=True)
+response = requests.get(url, headers=headers, stream=True, timeout=60)
 
 for message in response.iter_content(chunk_size=1024):
     message = message.decode('utf-8')
